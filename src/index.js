@@ -1,17 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider} from 'react-redux'
+import  configureStore   from './store/configureStore'
+import { BrowserRouter } from 'react-router-dom';
+import { startGetBudget} from './actions/budgetAction';
+import { startGetCategory } from './actions/categoryAction';
+import { startGetExpense } from './actions/expenseAction';
+import { startGetProfile } from './actions/profileAction';
+
+const store = configureStore()
+
+if(localStorage.getItem('token')){
+    store.dispatch(startGetBudget())
+    store.dispatch(startGetCategory())
+    store.dispatch(startGetExpense())
+    store.dispatch(startGetProfile())
+  
+}
+console.log('state', store.getState())
+store.subscribe(function(){
+  console.log(store.getState())
+})
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+       <App />
+    </BrowserRouter>
+   
+  </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
