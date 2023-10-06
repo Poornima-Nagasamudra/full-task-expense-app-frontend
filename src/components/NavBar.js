@@ -29,7 +29,7 @@ function NavBar(props){
    
    return(
         <div>
-            {/* <Menu theme="light" mode="horizontal"> */}
+           
             <Layout className="navbar">
                <Sider trigger={null} collapsible collapsed={collapsed}>
                    <div className="logo" />
@@ -74,28 +74,6 @@ function NavBar(props){
                         },
                       ]}
                     />
-                      // <Menu.Item>
-                      //   <Link to="/account"> Account </Link>
-                      // </Menu.Item>
-                      // <Menu.Item>
-                      //      <Link to="/userlogin">User login</Link>
-                      //      </Menu.Item>
-                      //      <Menu.Item>
-                      //      <Link to="/profile"> Profile</Link> 
-                      //      </Menu.Item>
-                      //      <Menu.Item> 
-                      //       <Link to="/setting"> Setting </Link>
-                      //       </Menu.Item>
-                            // <Menu.Item>
-                            // <Link to="/logout" onClick={() => {
-                            //     localStorage.removeItem('token')
-                            //     alert('succefully loggedout')
-                            //     props.history.push("/register")
-                            // }}> Logout</Link>
-                            // </Menu.Item>
-                            // <Menu.Item>
-                            //      <Link to="/archieve"> Archieve </Link>
-                            // </Menu.Item>
                        ) : 
                         (
                         <Menu
