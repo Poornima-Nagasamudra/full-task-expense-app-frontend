@@ -18,11 +18,15 @@ const CategoryContainer = (props) =>{
     },[dispatch])
 
     return(
-        <div>
+        <div >
             <h1>Category - {category.data.length} </h1>
             
-            <CategoryForm />
-            <CategoryList data={category.data} />
+            <div className="setting-category-form">
+               <CategoryForm />
+            </div>
+            <div className="setting-category-list">
+               <CategoryList data={category.data} />
+            </div>
 
         </div>
     )

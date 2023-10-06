@@ -23,7 +23,7 @@ const CategoryList = (props) => {
                 key: 'actions',
                 render : (text, record) => (
                     <Space>
-                        <Button onClick={() => {handleDelete(record._id)}}> Delete</Button>
+                        <Button onClick={() => {handleDelete(record.id)}}> Delete</Button>
                     </Space>)
             }
 

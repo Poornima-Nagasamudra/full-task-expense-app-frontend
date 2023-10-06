@@ -30,8 +30,12 @@ function ExpenseContainer(props){
     return(
         <div>
             
-            <ExpenseForm />
-            <ExpenseTable data={expense} />
+            <div >
+                <ExpenseForm />
+            </div>
+            <div className="expense_Listing">
+              <ExpenseTable data={expense} />
+            </div>
 
             <Chart1 expense={expense} budget={budget} />  
             <Chart2 category={category} expense={expense} />

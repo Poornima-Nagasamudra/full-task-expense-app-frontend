@@ -53,6 +53,12 @@ const expenseReducer = (state = expenseInitialState, action) => {
             return { ...state, data: new_arr };
         }
 
+        case "UPDATE_EXPENSE_INVOICE" : {
+            return {...state, data:state.data.map(function(ele){
+                return ele._id === action.payload
+            })}
+        }
+
         default : {
             return {...state}
         }

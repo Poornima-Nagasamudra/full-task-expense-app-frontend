@@ -68,7 +68,8 @@ export const startDeleteCategory = (id) => {
         })
         .then((response) => {
             const result = response.data 
-            dispatch(deleteCategory(result._id))
+            console.log(result)
+            dispatch(deleteCategory(result))
         })
         .catch((err) => {
             console.log(err)

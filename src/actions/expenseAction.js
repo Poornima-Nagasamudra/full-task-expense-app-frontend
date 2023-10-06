@@ -189,3 +189,24 @@ export const searchExpense = (arr) => {
       payload: arr,
     };
   };
+
+export function startUploadExpenseInvoice(formData, id){
+    return(dispatch) =>{
+        axios.put(`http://localhost:3111/users/expense/invoice_upload/${id}`, formData ,{
+            headers : {
+                'authorization' :  localStorage.getItem('token')
+             }
+        })
+        .then((response) =>{
+            const result = response.data
+            dispatch(update_expense_invoice(result))
+        })
+    }
+}
+
+const update_expense_invoice = (obj) => {
+    return {
+      type: "UPDATE_EXPENSE_INVOICE",
+      payload: obj,
+    };
+  };

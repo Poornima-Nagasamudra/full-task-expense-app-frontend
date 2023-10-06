@@ -6,7 +6,6 @@ function App() {
   
   return (
     <div>
-        <center><h1>EXPENSE APP</h1></center>
         <NavBar  />
     </div>
   );

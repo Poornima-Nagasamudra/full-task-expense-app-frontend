@@ -1,14 +1,15 @@
 import React, { useState} from 'react'
 import { useSelector,  useDispatch } from 'react-redux'
-import {   startDeleteExpense, startGetExpense } from '../actions/expenseAction'
+import {   startDeleteExpense, startGetExpense, startUploadExpenseInvoice } from '../actions/expenseAction'
 import ExpenseForm from './ExpenseForm'
 import {  Space, Table,  Button } from 'antd';
 import { searchExpense } from '../actions/expenseAction';
-
+import { DeleteOutlined, FilePdfOutlined } from "@ant-design/icons";
 
 
 function ExpenseTable(props){
     const {data} = props
+    const [file, setFile] = useState({});
     const[toggle, setToggle] = useState(false)
     const [record, setRecord] = useState({})
     const[ isEditClick, setIsEditClick] = useState(false)
@@ -43,6 +44,17 @@ function ExpenseTable(props){
           dispatch(startGetExpense())
         }
     }
+
+    const handleChange = (e) => {
+      setFile(e.target.files[0]);
+    }
+
+    const submitHandle = (e, id) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("pdf", file);
+      dispatch(startUploadExpenseInvoice(formData, id));
+    };
 
     const columns = [
         {
@@ -80,7 +92,47 @@ function ExpenseTable(props){
                     <Button onClick={() => {handleDelete(record.id)}}>Delete</Button>
                   </Space>
             )
-        }
+        },
+        {
+          title : 'Invoice Pdf',
+          dataIndex: 'invoice pdf',
+          key: 'invoice pdf',
+          render : (text, record) => (
+            <Space size="middle">
+                {record.invoicePdf ? (
+                  <a
+                  href={`http://localhost:3111/${record.invoicePdf}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  >
+
+                    <FilePdfOutlined
+                      style={{ color: "navy", fontSize: "50px" }}
+                    />
+                  </a>
+                ) : (
+                  <h4>Upload Invoice Pdf</h4>
+                )}
+            </Space>
+          )
+        },
+        {
+            title : "Upload Invoice Pdf",
+            key : "action",
+            render : (text, record) => (
+              <Space size="middle">
+                <form
+                  onSubmit={(e) => {
+                    submitHandle(e, record._id);
+                  }}
+                  encType="multipart/form-data"
+                >
+                  <input type="file" onChange={handleChange} />
+                  <input type="submit" className="invoiceUpload" />
+                </form>
+              </Space>
+            )
+          }
 
       ];
 
@@ -94,7 +146,7 @@ function ExpenseTable(props){
 
     return(        
        <> 
-          <div>
+          <div  >
             <input type="search" value={search} placeholder="search here..." onChange={handleSearch}  />
           </div>
           <div>
